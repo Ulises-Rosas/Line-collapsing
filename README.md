@@ -13,7 +13,7 @@ my $input_fasta = $ARGV[0]; #use the first argument from the Linux terminal
 unless(open(IN, "$input_fasta")){
 	print "\nError upon opening \"$input_fasta\"\n\n";
 	exit;
-	} #if file is not correctely uploaded, print out an error message
+	} #if file is not correctly uploaded, print out an error message
 
 my @lines  = <IN>; #store your all lines in an array
 close IN; #stop modifying the file
