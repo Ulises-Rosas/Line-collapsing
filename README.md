@@ -10,22 +10,22 @@ use warnings;
 my $input_fasta = $ARGV[0];
 
 unless(open(IN, "$input_fasta")){
-	print "\nError al abrir \"$input_fasta\"\n\n";
+	print "\nError upon opening \"$input_fasta\"\n\n";
 	exit;
 	}
 
-my @lineas  = <IN>;
+my @lines  = <IN>;
 close IN;
 
-my $linea =  join("", @lineas);
+my $line =  join("", @lines);
 my $results = "";
 
-for $linea (@lineas){
-	if($linea =~ m/^>/){
-	$results .=  "\n$linea"; 
+for $line (@lines){
+	if($line =~ m/^>/){
+	$results .=  "\n$line"; 
 	}else{
-	$linea =~ s/\s//g;
-	$results .=  $linea;
+	$line =~ s/\s//g;
+	$results .=  $line;
 	}
 }
 
