@@ -1,6 +1,6 @@
 # Line-collapsing
 
-Both DNA and protein files hold linebreaks along its sequence if those are downloaded from their corresponding respositories (e.g. GenBank). This actually ensure a quick sight and online exploration of stored data. These format, however, usually turns out certain issues when you attempt to conduct downstream procedures. Upon not having lines joined, find motifs or merge sequences from these non-collapsed sequences is easily attainable. Here `oneline.pl` script is presented to deal with linebreaks shown along sequences:
+Both DNA and protein files hold linebreaks along its sequence if those are downloaded from their corresponding respositories (e.g. GenBank). This actually ensure a quick sight and online exploration of stored data. These format, however, usually turns out certain issues when you attempt to conduct downstream procedures. Upon not having lines joined, find motifs or merge sequences from these non-collapsed sequences is not easily attainable. Here `oneline.pl` script is presented to deal with linebreaks shown along sequences:
 
 ```Perl
 #!/usr/bin/perl -w
