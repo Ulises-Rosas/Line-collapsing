@@ -18,7 +18,7 @@ unless(open(IN, "$input_fasta")){
 my @lines  = <IN>; #store your all lines in an array
 close IN; #stop modifying the file
 
-my $line =  join("", @lines); #lines are separated by an white space and stored in an scalar variable
+my $line =  join("", @lines); #lines are separated by white spaces and then stored them in a scalar variable
 my $results = ""; #rigth here is where results will be saved after the following loop:
 
 for $line (@lines){
