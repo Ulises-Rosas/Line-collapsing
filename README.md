@@ -1,5 +1,6 @@
 # Line-collapsing
-Perl-based utility which collapse lines of sequences from multifasta files
+
+Both DNA and protein files hold linebreaks along its sequence if those are downloaded from their corresponding respositories (e.g. GenBank). This actually ensure a quick sight and online exploration of stored data. These format, however, usually turns out certain issues when you attempt to conduct downstream procedures. Upon not having lines joined, find motifs or merge sequences from these non-collapsed sequences is easily attainable. Here `oneline.pl` script is presented to deal with linebreaks shown along sequences:
 
 ```Perl
 #!/usr/bin/perl -w
@@ -7,34 +8,33 @@ Perl-based utility which collapse lines of sequences from multifasta files
 use strict;
 use warnings;
 
-my $input_fasta = $ARGV[0];
+my $input_fasta = $ARGV[0]; #use the first argument from the Linux terminal
 
 unless(open(IN, "$input_fasta")){
 	print "\nError upon opening \"$input_fasta\"\n\n";
 	exit;
-	}
+	} #if file is not correctely uploaded, print out an error message
 
-my @lines  = <IN>;
-close IN;
+my @lines  = <IN>; #store your all lines in an array
+close IN; #stop modifying the file
 
-my $line =  join("", @lines);
-my $results = "";
+my $line =  join("", @lines); #lines are separated by an white space and stored in an scalar variable
+my $results = ""; #rigth here is where results will be saved after the following loop:
 
 for $line (@lines){
-	if($line =~ m/^>/){
-	$results .=  "\n$line"; 
+	if($line =~ m/^>/){#skip those line which starts with '>'
+	$results .=  "\n$line"; #new line before printing. That is, header will be separated from the sequence.
 	}else{
-	$line =~ s/\s//g;
+	$line =~ s/\s//g; #substite white spaces by nothing
 	$results .=  $line;
 	}
 }
 
-$results =~ s/^\n//g;
+$results =~ s/^\n//g; #remove new line at the biginning of results
 print "$results\n";
 exit;
 ```
 ## Input
-
 
 ```
 >Stellifer_lanceolatus
@@ -70,11 +70,12 @@ CCAATACCAGACACCCTTATTCGTCTGAGCTGTCCTAATTACAGCTGTTCTCCTATTACTCTCGCTTCCTGTCTTAGCTG
 CTGGAATTACCATACTTCTAACAGACCGCAACCTAAACACAACCTTCTTTGACCCGGCAGGAGGTGGAGACCCCATTCTA
 TATCAACACCTA
 ```
-## Output
+Given above input data, we can store it into  `sequence.fasta` and run the following comands in Linux:
 
 ```Bash
 perl oneline.pl sequences.fasta
 ```
+## Output
 ```
 >Stellifer_lanceolatus
 CTTTACCTGATTTTTGGTGCATGAGCCGGAATAGTGGGCACAGCTTTAAGCCTTCTTATCCGAGCTGAGCTGAGCCAGCCCGGCTCACTCCTTGGAGACGACCAGATCTACAACGTAATCGTCACAGCCCATGCTTTCGTTATAATCTTCTTTATAGTAATGCCCGTCATGATTGGAGGGTTCGGGAACTGACTCATCCCACTAATAATCGGAGCCCCCGACATAGCATTCCCTCGAATGAACAATATGAGCTTCTGACTTCTTCCCCCTTCTTTCCTCTTGCTCCTGACCTCTTCGGGAGTAGAAGCTGGGGCAGGAACCGGATGGACTGTTTATCCCCCACTCGCTGGTAATCTAGCACACGCAGGAGCTTCAGTCGACCTAGCAATCTTTTCCCTGCACCTTGCCGGTGTTTCTTCTATCCTGGGGGCCATTAACTTTATTACAACCATTATTAACATAAAACCTCCCGCTATTTCCCAGTATCAGACCCCTCTGTTTGTGTGAGCTGTCCTAATTACAGCTGTTCTTTTACTGCTCTCACTCCCAGTTTTAGCTGCAGGCATCACCATGCTTTTAACAGATCGAAACCTGAATACAACTTTCTTTGACCCAGCAGGAGGGGGTGATCCAATTCTCTACCAACACCTATTC
