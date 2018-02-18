@@ -73,7 +73,7 @@ TATCAACACCTA
 Given above input data, we can store it into  `sequence.fasta` and run the following comands in Linux:
 
 ```Bash
-perl oneline.pl sequences.fasta
+$ perl oneline.pl sequences.fasta
 ```
 ## Output
 ```
